@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Movie" representedClassName=".Movie" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="genre" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="movieDescription" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="showings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Showing" inverseName="movie" inverseEntity="Showing"/>
+    </entity>
+    <entity name="Reservation" representedClassName=".Reservation" syncable="YES">
+        <attribute name="customerEmail" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="customerPhone" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="reservationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="seatNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ticketPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ticketType" optional="YES" attributeType="String"/>
+        <relationship name="showing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Showing" inverseName="reservations" inverseEntity="Showing"/>
+    </entity>
+    <entity name="Showing" representedClassName=".Showing" syncable="YES">
+        <attribute name="availableSeats" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hallNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="movie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="showings" inverseEntity="Movie"/>
+        <relationship name="reservations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Reservation" inverseName="showing" inverseEntity="Reservation"/>
+    </entity>
+</model>
